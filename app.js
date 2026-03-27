@@ -49,6 +49,25 @@ app.get("/hello/:username", (req, res) => {
   res.send(`Hello ${req.params.username.toUpperCase()}`);
 });
 
+//método all
+app.all("/info", (req, res) => {
+  res.send("server info");
+});
+
+//middlewares
+app.use((req, res, next) => {
+  if (req.query.login === "fre@gmail.com") {
+    next();
+  } else {
+    res.send("No autorizado");
+  }
+});
+
+app.get("/dashboard", (req, res) => {
+  res.send("dashboard page");
+});
+
+//.
 app.put("/tasks", (req, res) => {
   res.send("Actualizando tareas");
 });
